@@ -8,7 +8,7 @@ class Destination
 
 	public $document = null,
 		   $root = null,
-		   $namespaces = array('xsl' => NAMESPACE_XSL);
+		   $namespaces = array('xsl' => self::NAMESPACE_XSL);
 
 	public function __construct()
 	{
@@ -33,7 +33,7 @@ class Destination
 	{
 		$this->root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:'.$namespace, $uri);
 
-		$this->namespaces[$namespaces] = $uri;
+		$this->namespaces[$namespace] = $uri;
 	}
 
 	public function addAttributeToElement( $name, $value, $element )
