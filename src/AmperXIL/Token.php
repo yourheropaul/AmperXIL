@@ -11,7 +11,9 @@ class Token
 	const TOKEN_NAMESPACE 				= "T_NAMESPACE";
 	const TOKEN_IMPORT		 			= "T_IMPORT";
 	const TOKEN_INCLUDE 				= "T_INCLUDE";
-	const CONSTANT_DEF 					= "T_CONSTANT_DEF";
+	const TOKEN_CONSTANT_DEF 	    	= "T_CONSTANT_DEF";
+
+	const TOKEN_CONSTANT 				= "T_CONSTANT";
 
 	const TOKEN_WHITESPACE 				= "T_WHITESPACE";
 
@@ -87,6 +89,11 @@ class Token
 	public function isAssignment()
 	{
 		return ($this->type == static::TOKEN_ASSIGNMENT);
+	}
+
+	public function isConstant()
+	{
+		return ($this->type == static::TOKEN_CONSTANT);
 	}
 
 	public function value()

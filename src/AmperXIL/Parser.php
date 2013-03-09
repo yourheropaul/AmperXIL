@@ -10,7 +10,7 @@ class Parser
 				Token::TOKEN_NAMESPACE 		   => array( 'class' => 'CompilerGrammar', 'method' => 'handleNamespaceSymbol' ),
 				Token::TOKEN_IMPORT    		   => array( 'class' => 'CompilerGrammar', 'method' => 'handleImportSymbol' ),
 				Token::TOKEN_INCLUDE 		   => array( 'class' => 'CompilerGrammar', 'method' => 'handleIncludeSymbol' ),
-				Token::CONSTANT_DEF 		   => array( 'class' => 'CompilerGrammar', 'method' => 'handleConstantDefSymbol' ),
+				Token::TOKEN_CONSTANT_DEF 	   => array( 'class' => 'CompilerGrammar', 'method' => 'handleConstantDefSymbol' ),
 				Token::TOKEN_MATCHING_TEMPLATE => array( 'class' => 'XSLGrammar', 'method' => 'handleMatchingTemplateSymbol' ),
 				Token::TOKEN_RENDERED_COMMENT  => array( 'class' => 'XSLGrammar', 'method' => 'handleRenderedComment' )
 			);

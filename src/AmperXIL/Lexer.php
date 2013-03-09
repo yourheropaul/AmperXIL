@@ -10,7 +10,7 @@ class Lexer
 	protected static $_terminals = array(
 
 		// Parser directives
-        "/^(#define)/" 						=> Token::CONSTANT_DEF,
+        "/^(#define)/" 						=> Token::TOKEN_CONSTANT_DEF,
         "/^(#if-?def(ined)?)/" 				=> 'directive_ifdef',
         "/^(#if-?n(ot)?-?def(ined)?)/" 		=> 'directive_ifndef',
         "/^(#else)/"		 				=> 'directive_else',
@@ -21,7 +21,7 @@ class Lexer
         "/^(namespace)\s+/" 					=> Token::TOKEN_NAMESPACE,
         "/^(import)\s+/" 						=> Token::TOKEN_IMPORT,
         "/^(include)\s+/" 						=> Token::TOKEN_INCLUDE,
-        "/^(constant)\s+/" 						=> Token::CONSTANT_DEF,
+        "/^(constant)\s+/" 						=> Token::TOKEN_CONSTANT_DEF,
 
         "/^if\s+(.+)/"							=> 'if',
         "/^else\s*if\s+(.+)/"					=> 'else_if',
@@ -62,7 +62,7 @@ class Lexer
         '/^_([a-z_-]+)/' 					=> "weak_symbol",
         '/^\$([a-z_:-]+)/' 					=> "variable",
         '/^@([a-z_:-]+)/' 					=> "attribute",
-        "/^([A-Z_-]+)/" 					=> "constant",
+        "/^([A-Z_-]+)/" 					=> Token::TOKEN_CONSTANT,
         "/^([a-zA-Z:_\/\[\]=\.-]+)/" 		=> Token::TOKEN_QUERY
     );
 
