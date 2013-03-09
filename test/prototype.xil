@@ -1,0 +1,69 @@
+&*
+ * AmperXIL Syntax Prototype
+ *
+ * Anything starting with '<' is a literal
+ * Anything else is a statement
+ *
+*&
+
+namespace test = "http://test.com"
+namespace anothertest http://test.com
+
+&& This is written as as an xsl:comment
+
+& import "Finesse/XHTML5"		& Import a XIL document
+& include "some_raw.xsl"		& include an xsl file
+
+constant BODY_XPATH = 'body'
+#define  CLASS_NAME = "big"
+constant NAVIGATION = [ 'home', 'about', 'services', contact' ]
+
+:weak_symbol = "value"
+
+#ifdef SOME_CONSTANT
+	$this_param_is = "set"
+	_weak_symbol = "new value"
+#end
+
+virtual $set_by_controller
+
+$global_param = "yes"
+
++ /
+	apply BODY_XPATH
+
++ body
+	& Expands out to <div class="body">
+	div.body 
+		test:fancy-title(title)
+		
+		for-each articles/article
+			<div class="article" id="article-{@id}">
+				apply p[article-body]
+			</div>
+		end 	& this is optional; end not required
+	
+& + <alternate-mode> body
++ body
+	div.body.crazy
+		text "this is @mode = alternate-mode"
+		
+- navigation
+	div.navigation
+		&* #each NAVIGATION as _navigation
+			li
+				@class = "{_navigation}"
+
+				if :navigation = $some_super_param
+					@class = "{_navigation} active"
+
+				value-of _navigation *&
+
+- test:fancy-title( $title )
+	<h1>
+		if sting-length($title) > 10
+			@class="%CLASS_NAME%"
+			
+		value-of .
+	</h1> 	& This closer doesn't need to be here, but it could be
+
