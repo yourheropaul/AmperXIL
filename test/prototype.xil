@@ -7,7 +7,7 @@
 *&
 
 namespace test = "http://test.com"
-namespace anothertest http://test.com
+namespace "anothertest" http://test.com
 
 && This is written as as an xsl:comment
 
@@ -18,7 +18,7 @@ constant BODY_XPATH = 'body'
 #define  CLASS_NAME = "big"
 constant NAVIGATION = [ 'home', 'about', 'services', contact' ]
 
-:weak_symbol = "value"
+_weak_symbol = "value"
 
 #ifdef SOME_CONSTANT
 	$this_param_is = "set"
