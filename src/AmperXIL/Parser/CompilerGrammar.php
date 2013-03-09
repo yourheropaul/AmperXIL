@@ -5,6 +5,7 @@ namespace AmperXIL\Parser;
 use AmperXIL\Source;
 use AmperXIL\Destination;
 use AmperXIL\Symbol;
+use AmperXIL\Symbol\SymbolException;
 
 class CompilerGrammar
 {
@@ -13,26 +14,22 @@ class CompilerGrammar
 												  Destination &$destination, 
 												  \DOMNode &$xml_document  )
 	{
-		$count = count($symbol->line_tokens);
+		try 
+		{
+			$namespace = $ns_uri = null;
+			$count = $symbol->findAssignment($namespace, $ns_uri, true);
 
-		if ($count < 2)
-			throw new ParserException($source, $symbol, "Too few arguments passed to namespace");
+			if (!$namespace->isStringOrQuery() || !$ns_uri->isStringOrQuery())
+				throw new SymbolException("Namespace expects both arguments to be strings");
 
-		if ($count > 3)
-			throw new ParserException($source, $symbol, "Too few arguments passed to namespace");
+			$destination->addNamespace($namespace->value(), $ns_uri->value());
 
-		if ($count == 3 && !$symbol->line_tokens[1]->isAssignment())
-			throw new ParserException($source, $symbol, "Namespace expects '[namespace] = [url]' syntax");
-
-		$namespace = $symbol->line_tokens[0];
-		$ns_uri	   = $symbol->line_tokens[$count-1];
-
-		if (!$namespace->isStringOrQuery() || !$ns_uri->isStringOrQuery())
-			throw new ParserException($source, $symbol, "Namespace expects both arguments to be strings");
-
-		$destination->addNamespace($namespace->value(), $ns_uri->value());
-
-		return (count($symbol->line_tokens)+1);
+			return ($count+1);
+		}
+		catch (SymbolException $e)
+		{
+			throw new ParserException($source, $symbol, $e->getMessage());
+		}
 	}
 
 	public static function handleImportSymbol( Source &$source, 
@@ -62,10 +59,25 @@ class CompilerGrammar
 													Destination &$destination, 
 													\DOMNode &$xml_document  )
 	{
-		$el = $destination->createChildElement('handle-constant-def', null, $xml_document);
 
-		$destination->addAttributeToElement("file", __FILE__, $el);
+		try 
+		{
+			$const_name = $const_value = null;
 
-		return 1;
+			$count = $symbol->findAssignment($const_name, $const_value, true);
+
+			if (!$const_name->isConstant())
+				throw new SymbolException("Invalid constant name");
+
+			// FIXME! Assign the constants via the symbol object
+			$el = $destination->createChildElement('handle-constant_def', null, $xml_document);
+			$destination->addAttributeToElement("file", __FILE__, $el);
+
+			return ($count+1);
+		}
+		catch (SymbolException $e)
+		{
+			throw new ParserException($source, $symbol, $e->getMessage());
+		}
 	}
 }

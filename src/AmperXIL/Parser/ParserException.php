@@ -2,7 +2,7 @@
 
 namespace AmperXIL\Parser;
 
-class ParserException extends genericParserException
+class ParserException extends GenericParserException
 {
 	public $source = null,
     	   $symbol = null;
