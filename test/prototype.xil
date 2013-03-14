@@ -6,7 +6,7 @@
  *
 *&
 
-namespace test = "http://test.com"
+namespace testns = "http://test.com"
 namespace "anothertest" http://test.com
 
 && This is written as as an xsl:comment
@@ -25,7 +25,7 @@ _weak_symbol = "value"
 	_weak_symbol = "new value"
 #end
 
-virtual $set_by_controller
+param $set_by_controller
 
 $global_param = "yes"
 
@@ -36,17 +36,20 @@ $global_param = "yes"
 	& Expands out to <div class="body">
 	div.body 
 		test:fancy-title(title)
+
+		<xsl:value-of select="@test" />
+		<xsl:text>fsdsdsa</xsl:text>
 		
 		for-each articles/article
-			<div class="article" id="article-{@id}">
+			<div class="article" id="article-{@id}"/>
 				apply p[article-body]
-			</div>
+			
 		end 	& this is optional; end not required
 	
-& + <alternate-mode> body
-+ body
++ <testns:alternate-mode> body
 	div.body.crazy
-		text "this is @mode = alternate-mode"
+		<div class="inner">
+			text "this is @mode = alternate-mode"
 		
 - navigation
 	div.navigation
@@ -60,10 +63,11 @@ $global_param = "yes"
 				value-of _navigation *&
 
 - test:fancy-title( $title )
-	<h1>
+	<h1 data-something="123">
 		if sting-length($title) > 10
 			@class="%CLASS_NAME%"
 			
 		value-of .
-	</h1> 	& This closer doesn't need to be here, but it could be
+	</h1> & This is optional
+	h2
 

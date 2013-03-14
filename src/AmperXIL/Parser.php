@@ -12,7 +12,8 @@ class Parser
 				Token::TOKEN_INCLUDE 		   => array( 'class' => 'CompilerGrammar', 'method' => 'handleIncludeSymbol' ),
 				Token::TOKEN_CONSTANT_DEF 	   => array( 'class' => 'CompilerGrammar', 'method' => 'handleConstantDefSymbol' ),
 				Token::TOKEN_MATCHING_TEMPLATE => array( 'class' => 'XSLGrammar', 'method' => 'handleMatchingTemplateSymbol' ),
-				Token::TOKEN_RENDERED_COMMENT  => array( 'class' => 'XSLGrammar', 'method' => 'handleRenderedComment' )
+				Token::TOKEN_RENDERED_COMMENT  => array( 'class' => 'XSLGrammar', 'method' => 'handleRenderedComment' ),
+				Token::TOKEN_LITERAL		   => array( 'class' => 'XSLGrammar', 'method' => 'handleLiteral' )
 			);
 
 	protected $_sources,

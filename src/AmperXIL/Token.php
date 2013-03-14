@@ -30,6 +30,7 @@ class Token
 	const TOKEN_MATCHING_TEMPLATE		= "T_TEMP_MATCH";
 	const TOKEN_NAMED_TEMPLATE			= "T_TEMP_NAMED";
 
+	const TOKEN_LITERAL					= "T_LITERAL";
 	const TOKEN_QUERY					= "T_QUERY";
 
 	///////////////////////////////////////////////////

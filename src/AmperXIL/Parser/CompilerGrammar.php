@@ -69,9 +69,7 @@ class CompilerGrammar
 			if (!$const_name->isConstant())
 				throw new SymbolException("Invalid constant name");
 
-			// FIXME! Assign the constants via the symbol object
-			$el = $destination->createChildElement('handle-constant_def', null, $xml_document);
-			$destination->addAttributeToElement("file", __FILE__, $el);
+			$source->setConstant($const_name->value(), $const_value);
 
 			return ($count+1);
 		}

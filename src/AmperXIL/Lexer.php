@@ -36,10 +36,10 @@ class Lexer
 
         "/^\s*(\.|this)\s*/"					=> "dot",
 
-        "/^\+\s*([a-zA-z0-9\/-]+)/" 		=> Token::TOKEN_MATCHING_TEMPLATE,
+        "/^\+\s*(<(([a-z_-]+):)?(.+)>)?\s*([a-zA-z0-9\/-]+)/" 		=> Token::TOKEN_MATCHING_TEMPLATE,
         "/^\-\s*([a-zA-z0-9\/:-]+)/" 		=> Token::TOKEN_NAMED_TEMPLATE,
 
-        "/^(<.+>)/"							=> 'literal',
+        "/^(<.+>)/"							=> Token::TOKEN_LITERAL,
 
         '/^(\[)/'							=> 'array_start',
         '/^(\])/'							=> 'array_end',
@@ -63,7 +63,7 @@ class Lexer
         '/^\$([a-z_:-]+)/' 					=> "variable",
         '/^@([a-z_:-]+)/' 					=> "attribute",
         "/^([A-Z_-]+)/" 					=> Token::TOKEN_CONSTANT,
-        "/^([a-zA-Z:_\/\[\]=\.-]+)/" 		=> Token::TOKEN_QUERY
+        "/^([a-zA-Z:0-9_\/\[\]=\.-]+)/" 		=> Token::TOKEN_QUERY
     );
 
 	protected $_source_lines = array(),

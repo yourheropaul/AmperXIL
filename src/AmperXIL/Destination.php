@@ -36,6 +36,19 @@ class Destination
 		$this->namespaces[$namespace] = $uri;
 	}
 
+	public function hasNamespace( $namespace )
+	{
+		return array_key_exists($namespace, $this->namespaces);
+	}
+
+	public function getNamespace( $namespace )
+	{
+		if (!$this->hasNamespace($namespace))
+			return null;
+
+		return $this->namespaces[$namespace];
+	}
+
 	public function addAttributeToElement( $name, $value, $element )
 	{
 		// Add basic attributes
